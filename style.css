@@ -34,6 +34,7 @@ a {
 }
 #app div img {
   height: 50%;
+  cursor: pointer;
 }
 #app div .title {
   line-height: 50px;
