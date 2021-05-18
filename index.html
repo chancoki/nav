@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导航</title>
+  <link  href="https://himg.bdimg.com/sys/portraitn/item/public.1.b2f7ff6d.qAf4G_K3uGrc1V-2KonoRA"  rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="./style.css">
+ 
+</head>
+<body>
+  <div id="app">
+    <div v-for="i in list">
+      <img :src="i.icon" alt="">
+      <a class="title" :href="i.url" target="_blank" :key="i.id">{{i.name}}</a>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.5/vue.common.dev.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>

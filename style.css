@@ -1,0 +1,47 @@
+body {
+  padding: 20px;
+  margin: 0 12em;
+  background-color: #444;
+}
+a {
+  text-decoration: none;
+  color: #444;
+}
+@media screen and (max-width: 1080px) {
+  .title {
+    display: none;
+  }
+  body {
+    padding: 20px;
+    margin: 0 2em;
+    background-color: #444;
+  }
+}
+#app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+}
+#app div {
+  background-color: #fff;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  min-width: 50px;
+  align-items: center;
+  justify-content: center;
+}
+#app div img {
+  height: 50%;
+}
+#app div .title {
+  line-height: 50px;
+  margin-left: 5px;
+}
+#app div:hover {
+  background-color: #00b0ff;
+}
+#app div:hover .title {
+  color: #fff;
+}
