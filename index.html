@@ -9,11 +9,19 @@
   <link rel="stylesheet" href="./style.css">
  
 </head>
-<body>
-  <div id="app">
-    <div v-for="i in list">
-      <img :src="i.icon" alt="" :id="i.url">
-      <a class="title" :href="i.url" target="_blank" :key="i.id">{{i.name}}</a>
+<body >
+  <div id="app" @click='item'>
+    <div v-for="i in list" class="nav">
+      <img class="icon" :src="i.icon" alt="" :id="i.url">
+      <a class="title" :href="i.url" target="_blank" :key="i.itemid">{{i.itemname}}</a>
+      <div class="remove" @click.stop='removeItem' :id='i.itemid'>X</div>
+    </div>
+    <div class="view" v-if='isView'>
+      <input type="text" placeholder="图标URL" v-model="icon">
+      <input type="text" placeholder="项目名称" v-model="itemname">
+      <input type="text" placeholder="项目URL" v-model="url" >
+      <button @click='additem'>添加</button>
+
     </div>
   </div>
   <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.5/vue.common.dev.js"></script>
