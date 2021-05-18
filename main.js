@@ -77,7 +77,7 @@ const app = new Vue({
     ]
   }
 })
-const nav = document.querySelector('.nav')
+const nav = document.querySelector('#app')
 nav.addEventListener('click', e => {
   if (e.target.nodeName === 'IMG') {
     open(e.target.id)
