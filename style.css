@@ -8,9 +8,13 @@ a {
   color: #444;
 }
 @media screen and (max-width: 1080px) {
-  .title,
-  .remove {
+  .title {
     display: none;
+  }
+  #app .nav div.remove {
+    right: 50%;
+    transform: translate(50%, 0);
+    top: -20%;
   }
   body {
     padding: 20px;
@@ -41,6 +45,9 @@ a {
 #app .nav .title {
   line-height: 50px;
   margin-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #app .nav:hover {
   background-color: #00b0ff;
@@ -67,11 +74,6 @@ a {
   cursor: pointer;
   color: #fff;
 }
-#app .nav .remove img {
-  height: 70%;
-  width: 70%;
-  margin-top: 15%;
-}
 #app div.view {
   box-sizing: border-box;
   position: fixed;
@@ -94,7 +96,7 @@ a {
   outline: none;
   border: none;
   background-color: #eee;
-  padding-left: 10px ;
+  padding-left: 10px;
   font-size: 1rem;
   border-radius: 5px;
 }
