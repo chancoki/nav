@@ -115,12 +115,7 @@ const app = new Vue({
       let s = window.localStorage.getItem("item");
       s = this.list;
       window.localStorage.setItem("item", JSON.stringify(s));
-      Vue.set(this.list, this.list.length, {
-        itemid: "add",
-        itemname: "",
-        url: "add",
-        icon: "https://z3.ax1x.com/2021/05/18/ghOHiD.png",
-      });
+      this.addAdd();
     },
     removeItem(e) {
       if (e.target.id != "add") {
@@ -136,18 +131,20 @@ const app = new Vue({
         open(e.target.id);
       } else if (e.target.id === "add") {
         this.isView = true;
-      } else if(e.target.id==='app'&&this.isView===true){
+      } else if (e.target.id === "app" && this.isView === true) {
         this.isView = false;
       }
     },
+    addAdd() {
+      Vue.set(this.list, this.list.length, {
+        itemid: "add",
+        itemname: "",
+        url: "add",
+        icon: "https://z3.ax1x.com/2021/05/18/ghOHiD.png",
+      });
+    },
   },
   mounted() {
-    Vue.set(this.list, this.list.length, {
-      itemid: "add",
-      itemname: "",
-      url: "add",
-      icon: "https://z3.ax1x.com/2021/05/18/ghOHiD.png",
-    });
+    this.addAdd();
   },
 });
-
