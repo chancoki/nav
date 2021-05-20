@@ -88,7 +88,7 @@ a {
 #app .view {
   box-sizing: border-box;
   position: fixed;
-  height: 17em;
+  height: 23em;
   width: 30em;
   top: 50%;
   left: 50%;
@@ -101,6 +101,19 @@ a {
   border-radius: 10px;
   animation: open 0.5s;
   overflow: hidden;
+}
+#app .view .oi {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#app .view .oi .out_file,
+#app .view .oi .in_file {
+  width: 48%;
+}
+#app .view .oi .in_file {
+  margin-top: 20px;
 }
 #app .view input,
 #app .view button {
