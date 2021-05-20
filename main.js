@@ -164,12 +164,34 @@ const app = new Vue({
       str = JSON.stringify(tmp);
       var blob = new Blob([str]);
       e.target.children[0].href = URL.createObjectURL(blob);
-      e.target.children[0].download = "chancoki_nav_config.json";
+      e.target.children[0].download = `chancoki_nav_${this.getCurrentDate()}_config.json`;
       e.target.children[0].click();
       this.isView = false;
     },
     btnclick() {
       this.$refs.file.click();
+    },
+    getCurrentDate() {
+      var curDate = new Date();
+      var curYear = curDate.getFullYear();
+      var curMonth = curDate.getMonth() + 1;
+      var curDay = curDate.getDate();
+      var curHour = curDate.getHours();
+      var curMinute = curDate.getMinutes();
+      var curSec = curDate.getSeconds();
+      return (
+        curYear +
+        "" +
+        curMonth +
+        "" +
+        curDay +
+        "" +
+        curHour +
+        "" +
+        curMinute +
+        "" +
+        curSec
+      );
     },
   },
   mounted() {
