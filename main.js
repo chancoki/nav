@@ -166,6 +166,7 @@ const app = new Vue({
       e.target.children[0].href = URL.createObjectURL(blob);
       e.target.children[0].download = "chancoki_nav_config.json";
       e.target.children[0].click();
+      this.isView = false;
     },
     btnclick() {
       this.$refs.file.click();
