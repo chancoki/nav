@@ -143,6 +143,33 @@ const app = new Vue({
         icon: "https://z3.ax1x.com/2021/05/18/ghOHiD.png",
       });
     },
+    infile(e) {
+      input = e.target;
+      if (window.FileReader) {
+        var file = input.files[0];
+        filename = file.name.split(".")[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+          var data = JSON.parse(this.result);
+          let s = window.localStorage.getItem("item");
+          s = data;
+          window.localStorage.setItem("item", JSON.stringify(s));
+        };
+        reader.readAsText(file);
+      }
+      location.reload();
+    },
+    outfile(e) {
+      let tmp = this.list.filter((i) => i.itemid != "add");
+      str = JSON.stringify(tmp);
+      var blob = new Blob([str]);
+      e.target.children[0].href = URL.createObjectURL(blob);
+      e.target.children[0].download = "chancoki_nav_config.json";
+      e.target.children[0].click();
+    },
+    btnclick() {
+      this.$refs.file.click();
+    },
   },
   mounted() {
     this.addAdd();
