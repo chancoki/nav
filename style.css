@@ -1,230 +1,189 @@
-const app = new Vue({
-  el: "#app",
-  data: {
-    list: [
-      {
-        itemid: 1,
-        itemname: "JQuery",
-        url: "https://jquery.cuishifeng.cn/index.html",
-        icon: "https://jquery.cuishifeng.cn/favicon.ico",
-      },
-      {
-        itemid: 2,
-        itemname: "BootCDN",
-        url: "https://www.bootcdn.cn/",
-        icon: "https://www.bootcdn.cn/assets/ico/favicon.ico?1618753550044",
-      },
-      {
-        itemid: 3,
-        itemname: "Less",
-        url: "https://less.bootcss.com/",
-        icon: "https://less.bootcss.com/public/ico/favicon.ico",
-      },
-      {
-        itemid: 4,
-        itemname: "Bootatrap",
-        url: "http://docs.bootcss.com/bootstrap-2.3.2/docs/index.html",
-        icon: "http://docs.bootcss.com/bootstrap-2.3.2/docs/assets/ico/favicon.png",
-      },
-      {
-        itemid: 5,
-        itemname: "Axios",
-        url: "http://www.axios-js.com/zh-cn/docs/",
-        icon: "http://www.axios-js.com/icon/favicon-32x32.png",
-      },
-      {
-        itemid: 6,
-        itemname: "React",
-        url: "https://react.docschina.org/",
-        icon: "https://react.docschina.org/favicon.ico",
-      },
-      {
-        itemid: 7,
-        itemname: "NDM",
-        url: "https://developer.mozilla.org/zh-CN/docs/Web",
-        icon: "https://developer.mozilla.org/favicon-48x48.97046865.png",
-      },
-      {
-        itemid: 8,
-        itemname: "印记笔记",
-        url: "https://docschina.org/",
-        icon: "https://docschina.org/favicon.ico",
-      },
-      {
-        itemid: 9,
-        itemname: "TypeScript",
-        url: "https://www.tslang.cn/",
-        icon: "https://www.tslang.cn/assets/images/icons/favicon.ico",
-      },
-      {
-        itemid: 10,
-        itemname: "Sass",
-        url: "https://www.sass.hk/",
-        icon: "https://www.sass.hk/favicon.ico",
-      },
-      {
-        itemid: 11,
-        itemname: "npm",
-        url: "https://www.npmjs.com/",
-        icon: "https://static.npmjs.com/b0f1a8318363185cc2ea6a40ac23eeb2.png",
-      },
-      {
-        itemid: 12,
-        itemname: "Vue",
-        url: "https://v3.cn.vuejs.org/",
-        icon: "https://v3.cn.vuejs.org/logo.png",
-      },
-      {
-        itemid: 13,
-        itemname: "nodejs",
-        url: "http://nodejs.cn/",
-        icon: "http://static.nodejs.cn/_static/img/favicon.png",
-      },
-      {
-        itemid: 14,
-        itemname: "ECMAScript",
-        url: "https://ecma262.docschina.org/",
-        icon: "https://ecma262.docschina.org/img/favicon.ico",
-      },
-    ],
-
-    itemid: 0,
-    itemname: "",
-    url: "",
-    icon: "",
-
-    isView: true,
-    flag: true,
-    index: 0,
-  },
-  created() {
-    let s = JSON.parse(window.localStorage.getItem("item"));
-    if (s) this.list = s;
-  },
-  methods: {
-    additem() {
-      if (this.flag) {
-        this.itemid = this.list[this.list.length - 2].itemid + 1;
-        Vue.set(this.list, this.list.length - 1, {
-          itemid: this.itemid,
-          itemname: this.itemname,
-          url: this.url,
-          icon: this.icon,
-        });
-        this.go()
-        let s = window.localStorage.getItem("item");
-        s = this.list;
-        window.localStorage.setItem("item", JSON.stringify(s));
-        this.addAdd();
-      } else {
-        Vue.set(this.list, this.index, {
-          itemid: this.list[this.index].itemid,
-          itemname: this.itemname,
-          url: this.url,
-          icon: this.icon,
-        });
-        this.go()
-        let tmp = this.list.filter((i) => i.itemid != "add");
-        let s = window.localStorage.getItem("item");
-        s = tmp;
-        window.localStorage.setItem("item", JSON.stringify(s));
-      }
-    },
-    removeItem(e) {
-      this.list = this.list.filter((i) => i.itemid != e.target.id);
-      let tmp = this.list.filter((i) => i.itemid != "add");
-      let s = window.localStorage.getItem("item");
-      s = tmp;
-      window.localStorage.setItem("item", JSON.stringify(s));
-    },
-    item(e) {
-      if (e.target.nodeName === "IMG" && e.target.id != "add") {
-        open(e.target.id);
-      } else if (e.target.id === "add") {
-        this.isView = true;
-        this.flag = true;
-        console.log(this.flag);
-      } else if (e.target.id === "app" && this.isView === true) {
-        this.go()
-      }
-    },
-    addAdd() {
-      Vue.set(this.list, this.list.length, {
-        itemid: "add",
-        itemname: "",
-        url: "add",
-        icon: "https://z3.ax1x.com/2021/05/18/ghOHiD.png",
-      });
-    },
-    infile(e) {
-      input = e.target;
-      if (window.FileReader) {
-        var file = input.files[0];
-        filename = file.name.split(".")[0];
-        var reader = new FileReader();
-        reader.onload = function () {
-          var data = JSON.parse(this.result);
-          let s = window.localStorage.getItem("item");
-          s = data;
-          window.localStorage.setItem("item", JSON.stringify(s));
-        };
-        reader.readAsText(file);
-      }
-      location.reload();
-    },
-    outfile(e) {
-      let tmp = this.list.filter((i) => i.itemid != "add");
-      str = JSON.stringify(tmp);
-      var blob = new Blob([str]);
-      e.target.children[0].href = URL.createObjectURL(blob);
-      e.target.children[0].download = `chancoki_nav_${this.getCurrentDate()}_config.json`;
-      e.target.children[0].click();
-      this.isView = false;
-    },
-    btnclick() {
-      this.$refs.file.click();
-    },
-    getCurrentDate() {
-      var curDate = new Date();
-      var curYear = curDate.getFullYear();
-      var curMonth = curDate.getMonth() + 1;
-      var curDay = curDate.getDate();
-      var curHour = curDate.getHours();
-      var curMinute = curDate.getMinutes();
-      var curSec = curDate.getSeconds();
-      return (
-        curYear +
-        "" +
-        curMonth +
-        "" +
-        curDay +
-        "" +
-        curHour +
-        "" +
-        curMinute +
-        "" +
-        curSec
-      );
-    },
-    edititem(e) {
-      this.isView = true;
-      this.flag = false;
-      this.index = this.list.indexOf(
-        this.list.filter((v) => v.itemid == e.target.id)[0]
-      );
-      console.log(this.index);
-      this.url = this.list[this.index].url;
-      this.itemname = this.list[this.index].itemname;
-      this.icon = this.list[this.index].icon;
-    },
-    go() {
-      this.itemname = "";
-      this.url = "";
-      this.icon = "";
-      this.isView = false;
-    },
-  },
-  mounted() {
-    this.addAdd();
-  },
-});
+body {
+  padding: 20px;
+  margin: 0 12em;
+  background-color: #444;
+}
+a {
+  text-decoration: none;
+  color: #444;
+}
+@media screen and (max-width: 1080px) {
+  .title {
+    display: none;
+  }
+  #app .nav div.remove {
+    right: -20px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+  }
+  #app .nav div.edit {
+    left: -20px;
+    transform: translate(50%, 50%);
+    bottom: 50%;
+  }
+  body {
+    padding: 20px;
+    margin: 0 0;
+    background-color: #444;
+  }
+  #app div.view {
+    width: 75%;
+  }
+}
+#app {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px;
+}
+#app .nav {
+  background-color: #fff;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  min-width: 50px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.6s;
+  padding: 0 10px ;
+}
+#app .nav .icon {
+  height: 50%;
+  cursor: pointer;
+}
+#app .nav .title {
+  line-height: 50px;
+  margin-left: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#app .nav:hover {
+  background: #00b0ff;
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.15);
+}
+#app .nav:hover .title {
+  color: #fff;
+}
+#app .nav:hover .remove {
+  display: block;
+}
+#app .nav:hover .edit {
+  display: block;
+}
+#app .nav .remove,
+#app .nav .edit {
+  box-sizing: border-box;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  right: 10px;
+  opacity: 0.3;
+  font-size: 0.5rem;
+  background-color: #f00;
+  display: none;
+  cursor: pointer;
+  color: #fff;
+  animation: out 0.8s;
+  font-weight: 100;
+  font-family: 等线;
+  transition: all 0.5s;
+}
+#app .nav .remove:hover,
+#app .nav .edit:hover {
+  opacity: 1;
+}
+#app .nav .edit {
+  left: 10px;
+}
+#app .view {
+  box-sizing: border-box;
+  position: fixed;
+  height: 21.5em;
+  width: 30em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 10px 0 10 #ccc;
+  border-radius: 10px;
+  animation: open 0.4s;
+  overflow: hidden;
+}
+#app .view .go {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  right: 20px;
+  top: 5px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #eee;
+  cursor: pointer;
+  color: #fff;
+  animation: out 0.8s;
+  font-weight: 500;
+  font-family: 等线;
+  transition: all 0.5s;
+}
+#app .view .go:hover {
+  background-color: #00b0ff;
+}
+#app .view .oi {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#app .view .oi .out_file,
+#app .view .oi .in_file {
+  width: 48%;
+}
+#app .view .oi .in_file {
+  margin-top: 20px;
+}
+#app .view input,
+#app .view button {
+  height: 40px;
+  margin-bottom: 10px;
+  outline: none;
+  border: none;
+  background-color: #eee;
+  padding-left: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: all 0.6s;
+}
+#app .view input:hover,
+#app .view button:hover {
+  background: #00b0ff;
+  color: #fff;
+}
+#app .view button {
+  margin-top: 20px;
+}
+@keyframes open {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 21.5em;
+  }
+}
+@keyframes out {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
