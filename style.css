@@ -23,7 +23,7 @@ a {
   }
   body {
     padding: 20px;
-    margin: 0 0;
+    margin: 0 10px;
     background-color: #444;
   }
   #app div.view {
