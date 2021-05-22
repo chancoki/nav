@@ -17,13 +17,13 @@
     <div v-for="i in list" class="nav" :title="i.itemname">
       <img class="icon" :src="i.icon" alt="" :id="i.url">
       <a class="title" :href="i.url" target="_blank" :key="i.itemid">{{i.itemname}}</a>
-      <div class="remove" @click.stop='removeItem' :id='i.itemid' v-if="i.itemid!='add'" title="删除">X</div>
-      <div class="edit" :id='i.itemid' @click.stop='edititem' v-if="i.itemid!='add'" title="编辑">E</div>
+      <div class="remove" @click.stop='removeItem' :id='i.itemid' v-if="i.itemid!='add'">X</div>
+      <div class="edit" :id='i.itemid' @click.stop='edititem' v-if="i.itemid!='add'" >E</div>
     </div>
     <div class="view" v-if='isView'>
       <div class="oi">
         <button class="out_file" @click='outfile'>导出 <a></a></button>
-        <button class="in_file" @click='btnclick'>导入<a></a></button>
+        <button class="in_file" @click='btnclick'>导入</button>
         <input type="file" ref='file' @change="infile" style="display: none;"></>
       </div>
       <input type="text" placeholder="图标URL" v-model="icon">
