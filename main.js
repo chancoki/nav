@@ -94,6 +94,8 @@ const app = new Vue({
     icon: "",
 
     isView: false,
+    flag: true,
+    index: 0,
   },
   created() {
     let s = JSON.parse(window.localStorage.getItem("item"));
@@ -101,37 +103,57 @@ const app = new Vue({
   },
   methods: {
     additem() {
-      this.itemid = this.list[this.list.length - 2].itemid + 1;
-      Vue.set(this.list, this.list.length - 1, {
-        itemid: this.itemid,
-        itemname: this.itemname,
-        url: this.url,
-        icon: this.icon,
-      });
-      this.itemname = "";
-      this.url = "";
-      this.icon = "";
-      this.isView = false;
-      let s = window.localStorage.getItem("item");
-      s = this.list;
-      window.localStorage.setItem("item", JSON.stringify(s));
-      this.addAdd();
-    },
-    removeItem(e) {
-      if (e.target.id != "add") {
-        this.list = this.list.filter((i) => i.itemid != e.target.id);
+      if (this.flag) {
+        this.itemid = this.list[this.list.length - 2].itemid + 1;
+        Vue.set(this.list, this.list.length - 1, {
+          itemid: this.itemid,
+          itemname: this.itemname,
+          url: this.url,
+          icon: this.icon,
+        });
+        this.itemname = "";
+        this.url = "";
+        this.icon = "";
+        this.isView = false;
+        let s = window.localStorage.getItem("item");
+        s = this.list;
+        window.localStorage.setItem("item", JSON.stringify(s));
+        this.addAdd();
+      } else {
+        Vue.set(this.list, this.index, {
+          itemid: this.list[this.index].itemid,
+          itemname: this.itemname,
+          url: this.url,
+          icon: this.icon,
+        });
+        this.itemname = "";
+        this.url = "";
+        this.icon = "";
+        this.isView = false;
         let tmp = this.list.filter((i) => i.itemid != "add");
         let s = window.localStorage.getItem("item");
         s = tmp;
         window.localStorage.setItem("item", JSON.stringify(s));
       }
     },
+    removeItem(e) {
+      this.list = this.list.filter((i) => i.itemid != e.target.id);
+      let tmp = this.list.filter((i) => i.itemid != "add");
+      let s = window.localStorage.getItem("item");
+      s = tmp;
+      window.localStorage.setItem("item", JSON.stringify(s));
+    },
     item(e) {
       if (e.target.nodeName === "IMG" && e.target.id != "add") {
         open(e.target.id);
       } else if (e.target.id === "add") {
         this.isView = true;
+        this.flag = true;
+        console.log(this.flag);
       } else if (e.target.id === "app" && this.isView === true) {
+        this.itemname = "";
+        this.url = "";
+        this.icon = "";
         this.isView = false;
       }
     },
@@ -192,6 +214,17 @@ const app = new Vue({
         "" +
         curSec
       );
+    },
+    edititem(e) {
+      this.isView = true;
+      this.flag = false;
+      this.index = this.list.indexOf(
+        this.list.filter((v) => v.itemid == e.target.id)[0]
+      );
+      console.log(this.index);
+      this.url = this.list[this.index].url;
+      this.itemname = this.list[this.index].itemname;
+      this.icon = this.list[this.index].icon;
     },
   },
   mounted() {
