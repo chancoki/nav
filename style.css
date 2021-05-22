@@ -34,12 +34,12 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 30px;
 }
 #app .nav {
   background-color: #fff;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 25px;
   display: flex;
   min-width: 50px;
   align-items: center;
