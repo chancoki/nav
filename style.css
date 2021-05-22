@@ -12,9 +12,14 @@ a {
     display: none;
   }
   #app .nav div.remove {
-    right: 50%;
-    transform: translate(50%, 0);
-    top: -20%;
+    right: -20px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+  }
+  #app .nav div.edit {
+    left: -20px;
+    transform: translate(50%, 50%);
+    bottom: 50%;
   }
   body {
     padding: 20px;
@@ -29,18 +34,19 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 20px;
+  gap: 30px;
 }
 #app .nav {
   background-color: #fff;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 25px;
   display: flex;
   min-width: 50px;
   align-items: center;
   justify-content: center;
   position: relative;
   transition: all 0.6s;
+  padding: 0 10px ;
 }
 #app .nav .icon {
   height: 50%;
@@ -54,7 +60,9 @@ a {
   white-space: nowrap;
 }
 #app .nav:hover {
-  background-color: #00b0ff;
+  background: #00b0ff;
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 15px 20px rgba(255, 255, 255, 0.15);
 }
 #app .nav:hover .title {
   color: #fff;
@@ -62,7 +70,11 @@ a {
 #app .nav:hover .remove {
   display: block;
 }
-#app .nav .remove {
+#app .nav:hover .edit {
+  display: block;
+}
+#app .nav .remove,
+#app .nav .edit {
   box-sizing: border-box;
   position: absolute;
   height: 20px;
@@ -71,7 +83,7 @@ a {
   text-align: center;
   border-radius: 50%;
   right: 10px;
-  opacity: 0.6;
+  opacity: 0.3;
   font-size: 0.5rem;
   background-color: #f00;
   display: none;
@@ -82,8 +94,12 @@ a {
   font-family: 等线;
   transition: all 0.5s;
 }
-#app .nav .remove:hover {
+#app .nav .remove:hover,
+#app .nav .edit:hover {
   opacity: 1;
+}
+#app .nav .edit {
+  left: 10px;
 }
 #app .view {
   box-sizing: border-box;
@@ -129,7 +145,7 @@ a {
 }
 #app .view input:hover,
 #app .view button:hover {
-  background-color: #00b0ff;
+  background: #00b0ff;
   color: #fff;
 }
 #app .view button {
@@ -148,6 +164,6 @@ a {
     opacity: 0;
   }
   100% {
-    opacity: 0.6;
+    opacity: 0.3;
   }
 }
