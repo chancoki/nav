@@ -111,10 +111,7 @@ const app = new Vue({
           url: this.url,
           icon: this.icon,
         });
-        this.itemname = "";
-        this.url = "";
-        this.icon = "";
-        this.isView = false;
+        this.go()
         let s = window.localStorage.getItem("item");
         s = this.list;
         window.localStorage.setItem("item", JSON.stringify(s));
@@ -126,10 +123,7 @@ const app = new Vue({
           url: this.url,
           icon: this.icon,
         });
-        this.itemname = "";
-        this.url = "";
-        this.icon = "";
-        this.isView = false;
+        this.go()
         let tmp = this.list.filter((i) => i.itemid != "add");
         let s = window.localStorage.getItem("item");
         s = tmp;
@@ -149,12 +143,8 @@ const app = new Vue({
       } else if (e.target.id === "add") {
         this.isView = true;
         this.flag = true;
-        console.log(this.flag);
       } else if (e.target.id === "app" && this.isView === true) {
-        this.itemname = "";
-        this.url = "";
-        this.icon = "";
-        this.isView = false;
+        this.go()
       }
     },
     addAdd() {
@@ -221,10 +211,15 @@ const app = new Vue({
       this.index = this.list.indexOf(
         this.list.filter((v) => v.itemid == e.target.id)[0]
       );
-      console.log(this.index);
       this.url = this.list[this.index].url;
       this.itemname = this.list[this.index].itemname;
       this.icon = this.list[this.index].icon;
+    },
+    go() {
+      this.itemname = "";
+      this.url = "";
+      this.icon = "";
+      this.isView = false;
     },
   },
   mounted() {
