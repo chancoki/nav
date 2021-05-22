@@ -34,7 +34,7 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 18px;
+  gap: 20px;
 }
 #app .nav {
   background-color: #fff;
@@ -115,8 +115,28 @@ a {
   padding: 20px;
   box-shadow: 10px 0 10 #ccc;
   border-radius: 10px;
-  animation: open 0.5s;
+  animation: open 0.4s;
   overflow: hidden;
+}
+#app .view .go {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  right: 20px;
+  top: 5px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #eee;
+  cursor: pointer;
+  color: #fff;
+  animation: out 0.8s;
+  font-weight: 500;
+  font-family: 等线;
+  transition: all 0.5s;
+}
+#app .view .go:hover {
+  background-color: #00b0ff;
 }
 #app .view .oi {
   height: 70px;
