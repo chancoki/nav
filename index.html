@@ -10,9 +10,8 @@
   <link href="https://himg.bdimg.com/sys/portraitn/item/public.1.b2f7ff6d.qAf4G_K3uGrc1V-2KonoRA" rel="shortcut icon"
     type="image/x-icon" />
   <link rel="stylesheet" href="./style.css">
-
+  <script src="./vue.js"></script>
 </head>
-
 <body>
   <div id="app" @click='item'>
     <div v-for="i in list" class="nav" :title="i.itemname">
@@ -34,7 +33,6 @@
       <div class="go" @click="go" title="关闭">X</div>
     </div>
   </div>
-  <script src="./vue.js"></script>
   <script src="./main.js"></script>
 </body>
 
